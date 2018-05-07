@@ -164,14 +164,14 @@ const styles = StyleSheet.create({
   },
   cancel: {
     position: "absolute",
-    right: 20,
-    top: 20,
+    right: 14,
+    top: 14,
     backgroundColor: "transparent"
   },
   flip: {
     position: "absolute",
-    right: 20,
-    top: 20,
+    right: 14,
+    top: 14,
     backgroundColor: "transparent"
   }
 });
