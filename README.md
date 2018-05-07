@@ -1,18 +1,20 @@
 # WhatsThat
 an app that let's you take a picture and it says out loud what is in the image
 
+### Steps to Install
 react-native init WhatsThat
 
-npm install
-npm install react-navigation --save
-npm install react-native-camera --save
-npm install react-native-elements --save
-npm install react-native-vector-icons --save
-npm install react-native-fetch-blob --save
-npm install clarifai --save
-npm install react-native-speech --save
+- npm install
+- npm install react-navigation --save
+- npm install react-native-camera --save
+- npm install react-native-elements --save
+- npm install react-native-vector-icons --save
+- npm install react-native-fetch-blob --save
+- npm install clarifai --save
+- npm install react-native-speech --save
+- npm install react-native-splash-screen@3.0.6 --save
 
-react-native link
+- react-native link
 
 Next, you need to drag the RCTCameraRoll.xcodeproj in your project folder to Xcode. Here is a simple diagram on where to find this file.
 
@@ -32,7 +34,11 @@ In Xcode FileFinder on project in General tab,
  Press Play to build
 
 
+ Noun Project - Icons
+ Sergey Demuskin camera flip
+ mikicon question mark
+ Allison Iven cancel
 
- 
+
 
 To see backlog of creation look at this repo https://git.generalassemb.ly/tara-fenton/shoTel in experiments/camera-6/camera
