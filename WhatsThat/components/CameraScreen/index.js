@@ -21,14 +21,16 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      path: null
+      path: null,
+      type: Camera.constants.Type.back,
+      mirrorImage: false
     };
   }
   componentDidMount() {
     process.nextTick = setImmediate;
   }
   componentWillUnmount() {
-    console.log('camera unmounted');
+    console.log("camera unmounted");
   }
 
   takePicture() {
@@ -39,13 +41,31 @@ export default class HomeScreen extends Component {
       })
       .catch(err => console.error(err));
   }
+  flipCamera() {
+    this.setState({
+      type:
+        this.state.type === Camera.constants.Type.back
+          ? Camera.constants.Type.front
+          : Camera.constants.Type.back,
+      mirrorImage:
+        this.state.mirrorImage === false
+          ? true
+          : false,
+      mirrorImage:
+        this.state.mirrorImage === false
+          ? true
+          : false
+    });
+  }
 
   renderCamera() {
     return (
       <Camera
         ref={cam => (this.camera = cam)}
         aspect={Camera.constants.Aspect.fill}
-        type={Camera.constants.Type.back}
+        mirrorImage={this.state.mirrorImage}
+        fixOrientation={true}
+        type={this.state.type}
         style={styles.preview}
         flashMode={Camera.constants.FlashMode.off}
         captureTarget={Camera.constants.CaptureTarget.disk}
@@ -54,6 +74,9 @@ export default class HomeScreen extends Component {
           "We need your permission to use your camera phone"
         }
       >
+        <TouchableOpacity style={styles.flip} onPress={() => this.flipCamera()}>
+          <Image source={require("../../assets/images/flip.png")} />
+        </TouchableOpacity>
         <TouchableHighlight
           style={styles.capture}
           onPress={this.takePicture.bind(this)}
@@ -69,16 +92,23 @@ export default class HomeScreen extends Component {
     return (
       <View>
         <Image source={{ uri: this.state.path }} style={styles.preview} />
-        <Text
+        {/* <Text
           style={styles.cancel}
           onPress={() => this.setState({ path: null })}
         >
           Cancel
-        </Text>
-        <TouchableOpacity style={styles.accept}  onPress={() => this.acceptPicture()}>
-          <Image source={require('../../assets/images/accept.png')} />
-
-
+        </Text> */}
+        <TouchableOpacity
+          style={styles.cancel}
+          onPress={() => this.setState({ path: null })}
+        >
+          <Image source={require("../../assets/images/cancel.png")} />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.accept}
+          onPress={() => this.acceptPicture()}
+        >
+          <Image source={require("../../assets/images/accept.png")} />
         </TouchableOpacity>
         {/* <Text style={styles.accept} onPress={() => this.acceptPicture()}>
           <Image source={require('../../assets/images/homePage.png')} />
@@ -88,10 +118,10 @@ export default class HomeScreen extends Component {
   }
 
   acceptPicture() {
-    console.log('in accept the pictre ', this.state.path);
-    this.props.navigation.navigate("TellScreen",{
+    console.log("in accept the pictre ", this.state.path);
+    this.props.navigation.navigate("TellScreen", {
       path: this.state.path
-    })
+    });
   }
 
   render() {
@@ -122,23 +152,26 @@ const styles = StyleSheet.create({
     height: 70,
     borderRadius: 35,
     borderWidth: 5,
-    borderColor: "#FFF",
+    borderColor: "#d664be",
     marginBottom: 15
   },
   accept: {
     position: "absolute",
     right: 140,
     top: 500,
-      marginBottom: 15,
-      backgroundColor: "transparent",
+    marginBottom: 15,
+    backgroundColor: "transparent"
   },
   cancel: {
     position: "absolute",
     right: 20,
     top: 20,
-    backgroundColor: "transparent",
-    color: "#BD2D87",
-    fontWeight: "600",
-    fontSize: 17
+    backgroundColor: "transparent"
+  },
+  flip: {
+    position: "absolute",
+    right: 20,
+    top: 20,
+    backgroundColor: "transparent"
   }
 });
