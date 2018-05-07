@@ -11,7 +11,8 @@ import {
   CameraRoll,
   FlatList,
   Text,
-  Animated
+  Dimensions,
+  Button
 } from "react-native";
 import { List, ListItem } from "react-native-elements";
 import RNFetchBlob from "react-native-fetch-blob";
@@ -34,15 +35,13 @@ export default class TellScreen extends React.Component {
     };
   }
   componentDidMount() {
-    // process.nextTick = setImmediate;
     // set the path sent from the CameraScreen
     this.setState({
       path: this.props.navigation.state.params.path
     });
   }
   componentWillUnmount() {
-    console.log('tellscreen unmounted');
-    // process.nextTick = setImmediate;
+    console.log("tellscreen unmounted");
   }
   componentDidUpdate(prevProps, prevState, snapshot) {
     // check for path change sent from CameraScreen
@@ -66,7 +65,6 @@ export default class TellScreen extends React.Component {
     RNFetchBlob.fs
       .readFile(this.state.path, "base64")
       .then(data => {
-
         app.models
           .predict(Clarifai.GENERAL_MODEL, { base64: data })
           .then(response => {
@@ -133,37 +131,50 @@ export default class TellScreen extends React.Component {
     // const textColor = this.state.selected ? "green" : "white";
     // console.log(textColor);
     return (
-      <View>
-        <List>
+      <View style={{ flex: 1 }}>
+        <List style={{ height: 100 }}>
           {this.state.conceptsLoaded ? (
             <FlatList
+              styles={styles.list}
               data={this.state.data.outputs[0].data.concepts}
               keyExtractor={(x, i) => i.toString()}
               renderItem={({ item, index }) => {
-                console.log(`Item = ${item.name}, index = ${index}`);
+                // console.log(`Item = ${item.name}, index = ${index}`);
                 return (
                   <View>
-                  <ListItem
-                    activeClassName={styles.active}
-                    // onPress = {this._onPressButton(item.id)}
-                    onPress={() => {this._onPressButton(index)}}
-                    id={item.id}
-                    extraData={this.state}
-                    title={item.name}
-                    rightIcon={{
-                      name: "volume-up",
-                      type: "font-awesome",
-                      style: { marginRight: 10, fontSize: 22, opacity: 0}
-                    }}
-                  />
-                </View>
+                    <ListItem
+                      style={styles.active}
+                      // onPress = {this._onPressButton(item.id)}
+                      onPress={() => {
+                        this._onPressButton(index);
+                      }}
+                      id={item.id}
+                      extraData={this.state}
+                      title={item.name}
+                      rightIcon={{
+                        name: "volume-up",
+                        type: "font-awesome",
+                        style: { marginRight: 10, fontSize: 22, opacity: 1 }
+                      }}
+                    />
+                  </View>
                 );
               }}
             />
           ) : (
-            <Text>Loading...</Text>
+            <Text style={styles.loading}>Loading...</Text>
           )}
         </List>
+        {/* <View style={styles.buttons}>
+          <Button
+            title="take picture"
+            onPress={() => {
+              this._onPressButton(index);
+            }}
+          >
+            takePicture
+          </Button>
+        </View>; */}
       </View>
     );
   }
@@ -176,7 +187,17 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: "#000"
   },
-  active: {
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
+  list: {
+    height: Dimensions.get("window").height - 50
+    //flexGrow: 1
   },
+  buttons: {
+    flex: 0.4,
+  },
+  loading: {
+    justifyContent: "center"
+  },
+  active: {
+    backgroundColor: "red"
+  }
 });

@@ -11,7 +11,8 @@ import {
   View,
   Dimensions,
   TouchableHighlight,
-  Image
+  Image,
+  TouchableOpacity
 } from "react-native";
 
 import Camera from "react-native-camera";
@@ -74,9 +75,14 @@ export default class HomeScreen extends Component {
         >
           Cancel
         </Text>
-        <Text style={styles.accept} onPress={() => this.acceptPicture()}>
-          OK
-        </Text>
+        <TouchableOpacity style={styles.accept}  onPress={() => this.acceptPicture()}>
+          <Image source={require('../../assets/images/accept.png')} />
+
+
+        </TouchableOpacity>
+        {/* <Text style={styles.accept} onPress={() => this.acceptPicture()}>
+          <Image source={require('../../assets/images/homePage.png')} />
+        </Text> */}
       </View>
     );
   }
@@ -121,11 +127,8 @@ const styles = StyleSheet.create({
   },
   accept: {
     position: "absolute",
-    right: 180,
-    top: 540,
-    color: "#FFF",
-    fontWeight: "600",
-    fontSize: 17,
+    right: 140,
+    top: 500,
       marginBottom: 15,
       backgroundColor: "transparent",
   },
@@ -134,7 +137,7 @@ const styles = StyleSheet.create({
     right: 20,
     top: 20,
     backgroundColor: "transparent",
-    color: "#FFF",
+    color: "#BD2D87",
     fontWeight: "600",
     fontSize: 17
   }
