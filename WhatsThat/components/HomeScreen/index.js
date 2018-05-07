@@ -17,6 +17,9 @@ import {
   Dimensions,
   YellowBox
 } from "react-native";
+import SplashScreen from 'react-native-splash-screen';
+
+
 const instructions = Platform.select({
   ios:
     "Take a picture\n" +
@@ -31,6 +34,7 @@ const instructions = Platform.select({
 type Props = {};
 export default class HomeScreen extends Component<Props> {
   componentDidMount(){
+    SplashScreen.hide();
     YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
     console.ignoredYellowBox = ['Remote debugger'];
   }
