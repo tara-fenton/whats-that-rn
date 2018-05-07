@@ -17,15 +17,14 @@ react-native init WhatsThat
 - react-native link
 
 ### Xcode
-Next, you need to drag the RCTCameraRoll.xcodeproj in your project folder to Xcode. Here is a simple diagram on where to find this file. \
+Next, you need to drag the RCTCameraRoll.xcodeproj in your project folder to Xcode. Here is a simple diagram on where to find this file. 
 
 https://www.codementor.io/blessingoraz/access-camera-roll-with-react-native-9uwupuuy0
  \
 Drag the RCTCameraRoll.xcodeproj file to the libraries file in Xcode and then click on Build Phases on the top right-hand corner in Xcode. Click the drop down of Link Binary With Libraries, then the + sign to add the libRCTCameraRoll.a. \
  \
 Add libRCTCameraRoll.a to WhatsThatTest as well \
- \
- \
+
 
 In Xcode FileFinder on project in General tab, \
  Bundle Identifier : com.tarafenton (your name) \
@@ -33,13 +32,13 @@ In Xcode FileFinder on project in General tab, \
  Deployment Info : Deployment Target iOS 11.3 \
  Targets: WhatsThatTest - Signing select personal team. \
  \
- Press Play to build  \
+ Press Play to build  
 
 
  Noun Project - Icons \
  Sergey Demuskin camera flip \
  mikicon question mark \
- Allison Iven cancel \
+ Allison Iven cancel
 
 
 
