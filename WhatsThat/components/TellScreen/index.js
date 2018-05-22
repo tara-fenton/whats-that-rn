@@ -18,6 +18,7 @@ import { List, ListItem } from "react-native-elements";
 import RNFetchBlob from "react-native-fetch-blob";
 import Clarifai from "clarifai";
 import Speech from "react-native-speech";
+//import { Container, Header, Content, List, ListItem, Text } from 'native-base';
 
 const app = new Clarifai.App({
   apiKey: "f73540863306425c809a0401e9080470"

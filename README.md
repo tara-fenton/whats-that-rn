@@ -13,6 +13,8 @@ react-native init WhatsThat
 - npm install clarifai --save
 - npm install react-native-speech --save
 - npm install react-native-splash-screen@3.0.6 --save
+- npm install native-base --save
+
 
 - react-native link
 
